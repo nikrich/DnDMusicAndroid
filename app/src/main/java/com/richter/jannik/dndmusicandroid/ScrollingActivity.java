@@ -1,5 +1,6 @@
 package com.richter.jannik.dndmusicandroid;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,9 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.richter.jannik.dndmusicandroid.models.Categories;
+
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -29,25 +37,16 @@ public class ScrollingActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        String[] vars = new String[6];
-        vars[0] = "Hello";
-        vars[1] = "Hello";
-        vars[2] = "Hello";
-        vars[3] = "Hello";
-        vars[4] = "Hello";
-        vars[5] = "Hello";
+        new HttpRequestTask().execute();
 
-        mAdapter = new CardAdapter(vars);
-        mRecyclerView.setAdapter(mAdapter);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
     }
 
     @Override
@@ -69,5 +68,30 @@ public class ScrollingActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class HttpRequestTask extends AsyncTask<Void, Void, Categories[]> {
+        @Override
+        protected Categories[] doInBackground(Void... params) {
+            try {
+                final String url = getString(R.string.rest_url) + "categories";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Categories[] categories = restTemplate.getForObject(url, Categories[].class);
+                return categories;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Categories[] categories) {
+
+            mAdapter = new CardAdapter(categories);
+            mRecyclerView.setAdapter(mAdapter);
+        }
+
     }
 }

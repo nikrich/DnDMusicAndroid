@@ -14,19 +14,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/view_hex_color"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="wrap_content"
+            android:id="@+id/cat_img"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"/>
+
+
 
         <TextView
-            android:id="@+id/text_name"
+            android:id="@+id/cat_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/view_hex_color"
+            android:layout_alignLeft="@id/cat_img"
+            android:layout_alignBottom="@id/cat_img"
+            android:gravity="right"
             android:layout_margin="15dp"
-            tools:text="Antony Ribot" />
+            tools:text="Test"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play"
+            android:id="@+id/button"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/cat_img"
+            android:background="@color/cardview_light_background"/>
 
 
     </RelativeLayout>
