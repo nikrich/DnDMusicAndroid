@@ -32,6 +32,8 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -39,13 +41,22 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"/>
 
-    <!--<android.support.design.widget.FloatingActionButton
+    <FrameLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/videoView" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />-->
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:background="@color/colorAccent"
+        android:src="@drawable/ic_pause_white"
+        android:visibility="invisible"
+        app:layout_anchorGravity="bottom|right|end" />
+
 
 </android.support.design.widget.CoordinatorLayout>
