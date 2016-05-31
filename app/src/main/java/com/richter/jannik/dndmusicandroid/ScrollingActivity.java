@@ -4,7 +4,6 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.richter.jannik.dndmusicandroid.fragments.PlayerYouTubeFrag;
 import com.richter.jannik.dndmusicandroid.models.Categories;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;

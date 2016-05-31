@@ -1,11 +1,9 @@
 package com.richter.jannik.dndmusicandroid;
 
-import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
 import android.widget.*;
 import android.view.*;
 
-import com.richter.jannik.dndmusicandroid.fragments.PlayerYouTubeFrag;
 import com.richter.jannik.dndmusicandroid.models.Categories;
 
 /**
@@ -55,9 +53,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                 context.playStarter(vh, R.raw.song);
                 mPrevView = view;
             }
-            //
-            //PlayerYouTubeFrag myFragment = PlayerYouTubeFrag.newInstance("lVvIXmrDs4c");
-            //((ScrollingActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.videoView, myFragment).commit();
+
         }
     }
 
