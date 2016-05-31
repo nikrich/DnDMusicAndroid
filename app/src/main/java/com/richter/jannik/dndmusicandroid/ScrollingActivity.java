@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.richter.jannik.dndmusicandroid.models.Categories;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -28,6 +29,8 @@ public class ScrollingActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private FloatingActionButton fab;
+    private CircularProgressView progressView;
+
     private ScrollingActivity mContext;
     //Current active ViewHolder in Adapter
     private CardAdapter.ViewHolder mPrevViewHolder;
@@ -50,6 +53,9 @@ public class ScrollingActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         mContext = this;
 
+        progressView = (CircularProgressView) findViewById(R.id.progress_view);
+        progressView.startAnimation();
+
         mediaPlayer = MediaPlayer.create(mContext, R.raw.song);
 
         //FAB
@@ -57,11 +63,11 @@ public class ScrollingActivity extends AppCompatActivity {
         fab.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     if (view.getId() == fab.getId()) {
-                        if(mPrevViewHolder != null) {
-                            switch(state) {
+                        if (mPrevViewHolder != null) {
+                            switch (state) {
                                 case PLAYING:
                                     fab.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_play_arrow_white));
                                     mPrevViewHolder.cur_status.setText("Paused...");
@@ -174,6 +180,10 @@ public class ScrollingActivity extends AppCompatActivity {
 
             mAdapter = new CardAdapter(categories,mContext);
             mRecyclerView.setAdapter(mAdapter);
+
+            //Stop loader
+            progressView.stopAnimation();
+            progressView.setVisibility(View.GONE);
 
         }
 

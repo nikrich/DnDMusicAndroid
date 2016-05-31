@@ -58,5 +58,13 @@
         android:visibility="invisible"
         app:layout_anchorGravity="bottom|right|end" />
 
+    <com.github.rahatarmanahmed.cpv.CircularProgressView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/progress_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cpv_indeterminate="true"
+        android:layout_gravity="center"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
